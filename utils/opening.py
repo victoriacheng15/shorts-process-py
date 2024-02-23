@@ -30,6 +30,6 @@ def create_opening(openings, output_folder):
 
         combined = CompositeVideoClip(display_clips)
         folder_path = os.path.join(
-            f"{output_folder}/{folder_name}", f"{folder_name}.png"
+            f"{output_folder}/{folder_name}", f"1_{folder_name}.png"
         )
         combined.save_frame(folder_path)
