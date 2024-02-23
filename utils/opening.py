@@ -2,7 +2,6 @@ from settings import *
 from utils.random_generator import color_generator
 
 
-
 def calc_vertical_position(text_height, content_length, index):
     return HALF_HEIGHT - (text_height * len(content_length) + 1) + index * 100
 
@@ -47,12 +46,19 @@ def create_title(title, font):
     title_clips = []
 
     for index, line in enumerate(wrapped_title):
-        temp_clip = TextClip(line, fontsize=TITLE_FONT_SIZE, font=font, color=FONT_COLOR)
+        temp_clip = TextClip(
+            line, fontsize=TITLE_FONT_SIZE, font=font, color=FONT_COLOR
+        )
         text_height = temp_clip.h
         SIZE = (VIDEO_W, (text_height + SPACING) * wrapped_title_len)
 
         line = TextClip(
-            line, fontsize=TITLE_FONT_SIZE, font=font, color=FONT_COLOR, kerning=3, size=SIZE
+            line,
+            fontsize=TITLE_FONT_SIZE,
+            font=font,
+            color=FONT_COLOR,
+            kerning=3,
+            size=SIZE,
         )
         line = line.set_position(("center", index * SPACING))
 
@@ -61,19 +67,26 @@ def create_title(title, font):
     return combined
 
 
-def create_contents(contents,font):
+def create_contents(contents, font):
     wrapped_contents = wrap_text(contents, MAX_WIDTH, CONTENT_FONT_SIZE)
     wrapped_contents_len = len(wrapped_contents) + 1
 
     contents_clips = []
 
     for index, line in enumerate(wrapped_contents):
-        temp_clip = TextClip(line, fontsize=CONTENT_FONT_SIZE, font=font, color=FONT_COLOR)
+        temp_clip = TextClip(
+            line, fontsize=CONTENT_FONT_SIZE, font=font, color=FONT_COLOR
+        )
         text_height = temp_clip.h
         SIZE = (VIDEO_W, (text_height + SPACING) * wrapped_contents_len)
 
         line = TextClip(
-            line, fontsize=CONTENT_FONT_SIZE, font=font, color=FONT_COLOR, kerning=2, size=SIZE
+            line,
+            fontsize=CONTENT_FONT_SIZE,
+            font=font,
+            color=FONT_COLOR,
+            kerning=2,
+            size=SIZE,
         )
         line = line.set_position(("center", index * SPACING))
 
@@ -84,7 +97,6 @@ def create_contents(contents,font):
 
 def create_opening(openings, output_folder):
     display_clips = []
-
 
     for item in openings.items():
         random_font = choice(FONTS)
@@ -100,7 +112,7 @@ def create_opening(openings, output_folder):
         display_clips.append(title)
 
         contents = create_contents(contents, random_font)
-        contents = contents.set_position(("center", SPACING * (2+3)))
+        contents = contents.set_position(("center", SPACING * (2 + 3)))
         display_clips.append(contents)
         print(f"completed contents clips for {folder_name}")
 

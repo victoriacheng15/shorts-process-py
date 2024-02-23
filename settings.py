@@ -42,16 +42,16 @@ DARK_BG_COLORS = [
     [51, 0, 0, 255],  # Dark Reddish-Brown
     [51, 0, 51, 255],  # Dark Purple
     [51, 25, 0, 255],  # Chocolate Brown
-    [25, 25, 25, 255],   # Darker Gray
-    [20, 20, 20, 255],   # Very Dark Gray
-    [30, 30, 40, 255],   # Midnight Blue
-    [40, 30, 30, 255],   # Dark Maroon
-    [30, 30, 0, 255],    # Olive
-    [30, 0, 30, 255],    # Dark Violet
-    [30, 30, 20, 255],   # Dark Moss Green
-    [20, 30, 30, 255],   # Dark Teal
-    [51, 51, 0, 255],    # Olive Drab
-    [51, 0, 25, 255],    # Dark Coral
-    [0, 25, 51, 255],    # Dark Indigo
-    [25, 51, 0, 255],    # Hunter Green
+    [25, 25, 25, 255],  # Darker Gray
+    [20, 20, 20, 255],  # Very Dark Gray
+    [30, 30, 40, 255],  # Midnight Blue
+    [40, 30, 30, 255],  # Dark Maroon
+    [30, 30, 0, 255],  # Olive
+    [30, 0, 30, 255],  # Dark Violet
+    [30, 30, 20, 255],  # Dark Moss Green
+    [20, 30, 30, 255],  # Dark Teal
+    [51, 51, 0, 255],  # Olive Drab
+    [51, 0, 25, 255],  # Dark Coral
+    [0, 25, 51, 255],  # Dark Indigo
+    [25, 51, 0, 255],  # Hunter Green
 ]
