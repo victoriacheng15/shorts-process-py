@@ -1,4 +1,4 @@
-from settings import * 
+from settings import *
 from utils.random_generator import color_generator
 
 
