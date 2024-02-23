@@ -1,41 +1,35 @@
 from settings import *
 from utils.random_generator import color_generator
 
-PADDING = 10
-MAX_WIDTH = 1040
-
 
 def calc_vertical_position(text_height, content_length, index):
     return HALF_HEIGHT - (text_height * len(content_length) + 1) + index * 100
 
 
 def create_bgs():
-    random_color = list(color_generator()) + [255]
+    bgs = []
 
-    bg = ColorClip(size=VERTICAL_VIDEO_SIZE, color=RANDOM_DARK_BG)
-    bgs = [bg]
-
-    for index in range(1, 5):
-        is_random = RANDOM_DARK_BG if not index % 2 else random_color
+    for index in range(0, 5):
+        random_color = list(color_generator()) + [255]
+        is_random = choice(DARK_BG_COLORS) if not index % 2 else random_color
         calc_w = VIDEO_W - index * PADDING
         calc_h = VIDEO_H - index * PADDING
-        # print("check width and height", calc_h, calc_w)
 
         bg = ColorClip(size=(calc_w, calc_h), color=is_random)
         bg = bg.set_position("center")
         bgs.append(bg)
 
-    combined_bg = CompositeVideoClip(bgs)
+    # combined_bg = CompositeVideoClip(bgs)
 
-    return [combined_bg]
+    return bgs
 
 
-def wrap_text(text, width):
+def wrap_text(text, width, font_size):
     words = text.split(" ")
     lines = []
     current_line = ""
     for word in words:
-        if TextClip(f"{current_line} {word}", fontsize=70).w <= width:
+        if TextClip(f"{current_line} {word}", fontsize=font_size).w <= width:
             current_line += " " + word if current_line else word
         else:
             lines.append(current_line.strip())
@@ -44,21 +38,27 @@ def wrap_text(text, width):
     return lines
 
 
-def create_title(title):
-    wrapped_title = wrap_text(title, MAX_WIDTH)
+def create_title(title, font):
+    wrapped_title = wrap_text(title, MAX_WIDTH, TITLE_FONT_SIZE)
     wrapped_title_len = len(wrapped_title) + 1
-    SPACING = 100
+    print(font)
 
     title_clips = []
 
     for index, line in enumerate(wrapped_title):
-        print(index, line)
-        temp_clip = TextClip(line, fontsize=70, color=FONT_COLOR)
+        temp_clip = TextClip(
+            line, fontsize=TITLE_FONT_SIZE, font=font, color=FONT_COLOR
+        )
         text_height = temp_clip.h
         SIZE = (VIDEO_W, (text_height + SPACING) * wrapped_title_len)
 
         line = TextClip(
-            line, fontsize=70, font=RANDOM_FONT, color=FONT_COLOR, kerning=3, size=SIZE
+            line,
+            fontsize=TITLE_FONT_SIZE,
+            font=font,
+            color=FONT_COLOR,
+            kerning=3,
+            size=SIZE,
         )
         line = line.set_position(("center", index * SPACING))
 
@@ -67,24 +67,26 @@ def create_title(title):
     return combined
 
 
-def create_contents(contents):
-    wrapped_contents = wrap_text(contents, MAX_WIDTH)
-    print(wrapped_contents)
+def create_contents(contents, font):
+    wrapped_contents = wrap_text(contents, MAX_WIDTH, CONTENT_FONT_SIZE)
     wrapped_contents_len = len(wrapped_contents) + 1
-    SPACING = 100
 
     contents_clips = []
 
     for index, line in enumerate(wrapped_contents):
-        print(index, line)
-        temp_clip = TextClip(line, fontsize=50, color=FONT_COLOR)
+        temp_clip = TextClip(
+            line, fontsize=CONTENT_FONT_SIZE, font=font, color=FONT_COLOR
+        )
         text_height = temp_clip.h
-        print(text_height)
         SIZE = (VIDEO_W, (text_height + SPACING) * wrapped_contents_len)
-        # SIZE =(VIDEO_W, 526)
 
         line = TextClip(
-            line, fontsize=50, font=RANDOM_FONT, color=FONT_COLOR, kerning=2, size=SIZE
+            line,
+            fontsize=CONTENT_FONT_SIZE,
+            font=font,
+            color=FONT_COLOR,
+            kerning=2,
+            size=SIZE,
         )
         line = line.set_position(("center", index * SPACING))
 
@@ -94,29 +96,30 @@ def create_contents(contents):
 
 
 def create_opening(openings, output_folder):
-    bg = create_bgs()
-    display = bg
-    # print(openings, output_folder)
+    display_clips = []
 
     for item in openings.items():
+        random_font = choice(FONTS)
+        display = create_bgs()
+        display_clips.extend(display)
+
         folder_name = item[0]
         title = item[1]["title"]
         contents = item[1]["content"]
 
-        title = create_title(title)
-        title = title.set_position(("center", 200))
-        display.append(title)
-        print("completed title clips")
+        title = create_title(title, random_font)
+        title = title.set_position(("center", SPACING * 2))
+        display_clips.append(title)
 
-        contents = create_contents(contents)
-        contents = contents.set_position(("center", 500))
-        display.append(contents)
-        print("completed contents clips")
+        contents = create_contents(contents, random_font)
+        contents = contents.set_position(("center", SPACING * (2 + 3)))
+        display_clips.append(contents)
+        print(f"completed contents clips for {folder_name}")
 
         if not os.path.exists(f"{output_folder}/{folder_name}"):
             os.mkdir(f"{output_folder}/{folder_name}")
 
-        combined = CompositeVideoClip(display)
+        combined = CompositeVideoClip(display_clips)
         folder_path = os.path.join(
             f"{output_folder}/{folder_name}", f"{folder_name}.png"
         )
