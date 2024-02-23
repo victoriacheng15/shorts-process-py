@@ -26,3 +26,16 @@ def video_process(path):
     print("\n=======================================================\n")
     print("==> The video operation is completed")
     print("\n=======================================================\n")
+
+
+def clean_video_folder(path):
+    entries = os.listdir(path)
+
+    for entry in entries:
+      entry_path = os.path.join(path, entry)
+
+      if os.path.isfile(entry_path):
+          os.remove(entry_path)
+      elif os.path.isdir(entry_path):
+          shutil.rmtree(entry_path)
+    print(f"All contents of '{VIDEO_ASSETS}' have been cleared.")
