@@ -1,5 +1,6 @@
 import os
 import shutil
+from sys import argv, exit
 from random import choice, randint
 from moviepy.editor import (
     VideoFileClip,
