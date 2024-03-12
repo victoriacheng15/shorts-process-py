@@ -1,14 +1,13 @@
 from settings import *
 
 
-def video_process(path):
+def video_process(path, shorts_save_path):
     video_dirs = os.listdir(path)
     print(video_dirs)
 
     for dir in video_dirs:
         dir_path = os.path.join(f"{path}", dir)
         files = sorted(os.listdir(dir_path))
-        print(dir)
 
         clips = []
         for file in files:
@@ -16,12 +15,11 @@ def video_process(path):
             if file.endswith("png"):
                 clip = ImageClip(file_path, duration=4).fx(vfx.fadeout, duration=1)
             else:
-                clip = VideoFileClip(file_path).fx(vfx.fadeout, duration=1, audio=False)
+                clip = VideoFileClip(file_path).fx(vfx.fadeout, duration=1)
             clips.append(clip)
-
-            save_path = "./"
+            
             combined = concatenate_videoclips(clips, method="compose")
-            combined.write_videofile(f"{save_path}/{dir}.mp4", fps=60, audio_codec=None)
+            combined.write_videofile(f"{shorts_save_path}/{dir}.mp4", fps=60, audio_codec=None)
 
     print("\n=======================================================\n")
     print("==> The video operation is completed")
