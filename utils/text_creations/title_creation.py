@@ -5,7 +5,6 @@ from utils.text_creations.general import wrap_text
 def create_title(title, font):
     wrapped_title = wrap_text(title, MAX_WIDTH, TITLE_FONT_SIZE)
     wrapped_title_len = len(wrapped_title) + 1
-    print(font)
 
     title_clips = []
 
