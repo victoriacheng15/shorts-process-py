@@ -17,9 +17,11 @@ def video_process(path, shorts_save_path):
             else:
                 clip = VideoFileClip(file_path).fx(vfx.fadeout, duration=1)
             clips.append(clip)
-            
+
             combined = concatenate_videoclips(clips, method="compose")
-            combined.write_videofile(f"{shorts_save_path}/{dir}.mp4", fps=60, audio_codec=None)
+            combined.write_videofile(
+                f"{shorts_save_path}/{dir}.mp4", fps=60, audio_codec=None
+            )
 
     print("\n=======================================================\n")
     print("==> The video operation is completed")
