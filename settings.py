@@ -14,6 +14,7 @@ from moviepy.editor import (
 
 
 VIDEO_ASSETS = "video"
+SHORTS_SAVE_PATH = ""
 
 VERTICAL_VIDEO_SIZE = (1080, 1920)
 VIDEO_W, VIDEO_H = VERTICAL_VIDEO_SIZE

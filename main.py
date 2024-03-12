@@ -1,6 +1,18 @@
 from settings import *
+import csv
 from utils.opening import create_opening
 from utils.video import video_process, clean_video_folder
+
+
+def read_csv(openings):
+    with open("./contents_idea - shorts.csv") as f:
+        reader = csv.reader(f)
+        for row in list(reader)[1:4]:
+            filename = row[0]
+            title = row[1]
+            content = row[2]
+            entry = {"title": title, "content": content}
+            openings[filename] = entry
 
 
 def main():
@@ -13,12 +25,8 @@ def main():
 
     action = argv[1]
 
-    openings = {
-        "lorem": {
-            "title": "Title Placeolder something",
-            "content": "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-        },
-    }
+    openings = {}
+    read_csv(openings)
 
     if action == "opening":
         print("Creating opening image")
