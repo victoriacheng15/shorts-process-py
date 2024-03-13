@@ -1,18 +1,3 @@
-import os
-import shutil
-from sys import argv, exit
-from random import choice, randint
-from moviepy.editor import (
-    VideoFileClip,
-    ImageClip,
-    ColorClip,
-    TextClip,
-    vfx,
-    CompositeVideoClip,
-    concatenate_videoclips,
-)
-
-
 VIDEO_ASSETS = "video"
 SHORTS_SAVE_PATH = ""
 
