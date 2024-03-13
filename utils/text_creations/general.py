@@ -1,5 +1,7 @@
-from settings import *
+from moviepy.editor import TextClip, ColorClip
+from random import choice
 from utils.random_generator import color_generator
+from settings import HALF_HEIGHT, DARK_BG_COLORS, VIDEO_W, VIDEO_H, PADDING
 
 
 def calc_vertical_position(text_height, content_length, index):

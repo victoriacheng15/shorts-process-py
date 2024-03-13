@@ -1,10 +1,13 @@
-from settings import *
+import os
+from random import choice
+from moviepy.editor import CompositeVideoClip
 from utils.text_creations.general import create_bgs
 from utils.text_creations.title_creation import create_title
 from utils.text_creations.contents_creation import create_contents
+from settings import VIDEO_ASSETS, FONTS, SPACING
 
 
-def create_opening(openings, output_folder):
+def create_opening(openings):
     display_clips = []
 
     for item in openings.items():
@@ -25,11 +28,11 @@ def create_opening(openings, output_folder):
         display_clips.append(contents)
         print(f"completed contents clips for {folder_name}")
 
-        if not os.path.exists(f"{output_folder}/{folder_name}"):
-            os.mkdir(f"{output_folder}/{folder_name}")
+        if not os.path.exists(f"{VIDEO_ASSETS}/{folder_name}"):
+            os.mkdir(f"{VIDEO_ASSETS}/{folder_name}")
 
         combined = CompositeVideoClip(display_clips)
         folder_path = os.path.join(
-            f"{output_folder}/{folder_name}", f"1_{folder_name}.png"
+            f"{VIDEO_ASSETS}/{folder_name}", f"1_{folder_name}.png"
         )
         combined.save_frame(folder_path)

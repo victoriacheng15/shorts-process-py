@@ -1,4 +1,4 @@
-from settings import *
+from random import choice, randint
 
 
 def color_generator():

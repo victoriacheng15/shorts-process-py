@@ -1,12 +1,14 @@
-from settings import *
+import os, shutil
+from moviepy.editor import ImageClip, VideoFileClip, vfx, concatenate_videoclips
+from settings import VIDEO_ASSETS
 
 
-def video_process(path, shorts_save_path):
-    video_dirs = os.listdir(path)
+def video_process(shorts_save_path):
+    video_dirs = os.listdir(VIDEO_ASSETS)
     print(video_dirs)
 
     for dir in video_dirs:
-        dir_path = os.path.join(f"{path}", dir)
+        dir_path = os.path.join(f"{VIDEO_ASSETS}", dir)
         files = sorted(os.listdir(dir_path))
 
         clips = []
@@ -28,14 +30,14 @@ def video_process(path, shorts_save_path):
     print("\n=======================================================\n")
 
 
-def clean_video_folder(path):
-    entries = os.listdir(path)
+def clean_video_folder():
+    entries = os.listdir(VIDEO_ASSETS)
 
     for entry in entries:
-        entry_path = os.path.join(path, entry)
+        entry_path = os.path.join(VIDEO_ASSETS, entry)
 
         if os.path.isfile(entry_path):
             os.remove(entry_path)
         elif os.path.isdir(entry_path):
             shutil.rmtree(entry_path)
-    print(f"All contents of '{path}' have been cleared.")
+    print(f"All contents of '{VIDEO_ASSETS}' have been cleared.")
