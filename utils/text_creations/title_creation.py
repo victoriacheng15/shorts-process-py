@@ -1,5 +1,6 @@
-from settings import *
+from moviepy.editor import TextClip, CompositeVideoClip
 from utils.text_creations.general import wrap_text
+from settings import MAX_WIDTH, TITLE_FONT_SIZE,FONT_COLOR,VIDEO_W, SPACING
 
 
 def create_title(title, font):

@@ -1,4 +1,5 @@
-from settings import *
+from moviepy.editor import TextClip, CompositeVideoClip
+from settings import MAX_WIDTH, CONTENT_FONT_SIZE, FONT_COLOR, VIDEO_W, SPACING
 from utils.text_creations.general import wrap_text
 
 
