@@ -4,6 +4,7 @@ from utils.opening import create_opening
 from utils.video import video_process, clean_video_folder
 from settings import VIDEO_ASSETS, SHORTS_SAVE_PATH
 
+
 def read_csv(openings):
     with open("./contents_idea - shorts.csv") as f:
         reader = csv.reader(f)
