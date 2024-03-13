@@ -1,8 +1,8 @@
-from settings import *
-import csv
+import os, csv
+from sys import argv, exit
 from utils.opening import create_opening
 from utils.video import video_process, clean_video_folder
-
+from settings import VIDEO_ASSETS, SHORTS_SAVE_PATH
 
 def read_csv(openings):
     with open("./contents_idea - shorts.csv") as f:
@@ -30,13 +30,13 @@ def main():
 
     if action == "opening":
         print("Creating opening image")
-        create_opening(openings, VIDEO_ASSETS)
+        create_opening(openings)
     elif action == "video":
         print("Processing video")
-        video_process(VIDEO_ASSETS)
+        video_process(SHORTS_SAVE_PATH)
     elif action == "clean":
         print("Cleaning the folder")
-        clean_video_folder(VIDEO_ASSETS)
+        clean_video_folder()
     else:
         print("Unknown action: {action}")
 
