@@ -1,9 +1,9 @@
 import os, shutil
 from moviepy.editor import ImageClip, VideoFileClip, vfx, concatenate_videoclips
-from settings import VIDEO_ASSETS
+from settings import VIDEO_ASSETS, SHORTS_SAVE_PATH
 
 
-def video_process(shorts_save_path):
+def video_process():
     video_dirs = os.listdir(VIDEO_ASSETS)
     print(video_dirs)
 
@@ -22,7 +22,7 @@ def video_process(shorts_save_path):
 
             combined = concatenate_videoclips(clips, method="compose")
             combined.write_videofile(
-                f"{shorts_save_path}/{dir}.mp4", fps=60, audio_codec=None
+                f"{SHORTS_SAVE_PATH}/{dir}.mp4", fps=60, audio_codec=None
             )
 
     print("\n=======================================================\n")
